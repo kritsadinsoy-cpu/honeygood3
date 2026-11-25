@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สินค้าทั้งหมด — Honey good</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 3.5rem;
+    }
+    #filter-bar .btn.active {
+      background-color: var(--text-primary);
+      color: var(--bg-card);
+      border-color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-logo">Honey <span>good</span></a>
+      <nav style="display: flex; gap: 2rem; align-items: center;">
+        <a href="index.html" style="text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; letter-spacing: 0.1em;">หน้าแรก</a>
+        <a href="product.html" style="text-decoration: none; color: var(--text-primary); font-size: 0.85rem; letter-spacing: 0.1em;">สินค้าทั้งหมด</a>
+        <a href="admin.html" style="text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.1em;">ผู้ดูแลระบบ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 2.5rem;">
+        <span class="section-subtitle">The Collection</span>
+        <h1>คอลเลกชันน้ำผึ้งแท้</h1>
+      </div>
+
+      <div id="filter-bar"></div>
+
+      <div id="product-list" class="product-grid"></div>
+    </div>
+  </main>
+
+  <footer style="border-top: 1px solid var(--border-light); padding: 3rem 0; text-align: center;">
+    <div class="container">
+      <p style="font-size: 0.85rem; color: var(--text-muted);">© 2026 Honey good. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

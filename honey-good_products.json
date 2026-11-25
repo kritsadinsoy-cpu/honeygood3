@@ -1,0 +1,22 @@
+[
+  {
+    "id": "HG-01",
+    "name": "Honey good น้ำผึ้งแท้แบบกระปุก (Jar Edition)",
+    "mood": "sweet",
+    "type": "rollon",
+    "size": "500 ml",
+    "price": 259,
+    "image": "images/honey-jar.jpg",
+    "description": "ความหวานบริสุทธิ์จากธรรมชาติ เก็บไว้ในกระปุกที่คุ้มค่าสำหรับทุกวัน หวานละมุน เข้มข้นตามธรรมชาติ เติมความอบอุ่นให้ทุกมื้อของคุณ"
+  },
+  {
+    "id": "HG-02",
+    "name": "Honey good น้ำผึ้งแท้แบบขวด (Bottle Edition)",
+    "mood": "fresh",
+    "type": "spray",
+    "size": "500 ml",
+    "price": 229,
+    "image": "images/honey-bottle.jpg",
+    "description": "หยิบใช้ง่าย รินสะดวก ความหวานบริสุทธิ์ในขวดเดียว รสละมุน พร้อมเติมความหอมหวานให้เครื่องดื่มและอาหารทุกจาน"
+  }
+]

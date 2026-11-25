@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Honey good - น้ำผึ้งแท้จากธรรมชาติ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      body * { visibility: hidden; }
+      #print-area, #print-area * { visibility: visible; }
+      #print-area { position: absolute; left: 0; top: 0; width: 100%; border: 2px solid #000; padding: 20px; }
+    }
+  </style>
+</head>
+<body class="bg-amber-50 text-stone-800 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-amber-500 text-white p-4 shadow-md sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold tracking-wide">🍯 Honey good</h1>
+      <div class="space-x-2">
+        <button onclick="switchTab('shop')" class="bg-white text-amber-600 px-3 py-1.5 rounded-lg font-semibold text-sm">หน้าร้าน</button>
+        <button onclick="switchTab('pack')" class="bg-amber-800 text-white px-3 py-1.5 rounded-lg font-semibold text-sm">ระบบแพ็ค & จ่าหน้า</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ส่วนที่ 1: Landing Page หน้าร้าน -->
+  <main id="shop-tab" class="max-w-4xl mx-auto p-6">
+    <div class="text-center my-6">
+      <h2 class="text-3xl font-extrabold text-amber-800">ความหวานบริสุทธิ์จากธรรมชาติแท้ 100%</h2>
+      <p class="text-stone-600 mt-2">คัดสรรน้ำผึ้งคุณภาพดี สดใหม่จากฟาร์ม พร้อมส่งตรงถึงหน้าบ้านคุณ</p>
+    </div>
+
+    <!-- สินค้า 2 SKUs -->
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <!-- SKU 1 -->
+      <div class="bg-white rounded-2xl shadow p-5 border border-amber-100">
+        <img src="images/honey-wild.jpg" alt="น้ำผึ้งดอกไม้ป่า" class="w-full h-48 object-cover rounded-xl mb-4 bg-amber-100">
+        <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-bold">SKU-01</span>
+        <h3 class="text-xl font-bold mt-2">Honey good น้ำผึ้งดอกไม้ป่าเดือน 5 (500g)</h3>
+        <p class="text-sm text-stone-500 mt-1">หอมละมุน อุดมด้วยสารต้านอนุมูลอิสระ</p>
+        <div class="flex justify-between items-center mt-4">
+          <span class="text-xl font-bold text-amber-600">250 บาท</span>
+          <div class="flex items-center space-x-2">
+            <label class="text-sm">จำนวน:</label>
+            <input type="number" id="qty-sku1" value="0" min="0" onchange="calcTotal()" class="w-16 border rounded-lg p-1 text-center">
+          </div>
+        </div>
+      </div>
+
+      <!-- SKU 2 -->
+      <div class="bg-white rounded-2xl shadow p-5 border border-amber-100">
+        <img src="images/honey-longan.jpg" alt="น้ำผึ้งดอกลำไย" class="w-full h-48 object-cover rounded-xl mb-4 bg-amber-100">
+        <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-bold">SKU-02</span>
+        <h3 class="text-xl font-bold mt-2">Honey good น้ำผึ้งดอกลำไยแท้ (500g)</h3>
+        <p class="text-sm text-stone-500 mt-1">หวานกลมกล่อม เหมาะสำหรับชงเครื่องดื่มและเบเกอรี่</p>
+        <div class="flex justify-between items-center mt-4">
+          <span class="text-xl font-bold text-amber-600">220 บาท</span>
+          <div class="flex items-center space-x-2">
+            <label class="text-sm">จำนวน:</label>
+            <input type="number" id="qty-sku2" value="0" min="0" onchange="calcTotal()" class="w-16 border rounded-lg p-1 text-center">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ฟอร์มสั่งซื้อ -->
+    <form onsubmit="submitOrder(event)" class="bg-white rounded-2xl shadow p-6 border border-amber-200">
+      <h3 class="text-lg font-bold text-amber-800 mb-4">ข้อมูลการจัดส่ง</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">ชื่อ-นามสกุล ผู้รับ *</label>
+          <input type="text" id="cust-name" required class="w-full border rounded-lg p-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">เบอร์โทรศัพท์ *</label>
+          <input type="tel" id="cust-phone" required class="w-full border rounded-lg p-2">
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">ที่อยู่จัดส่ง (พร้อมรหัสไปรษณีย์) *</label>
+        <textarea id="cust-address" rows="3" required class="w-full border rounded-lg p-2"></textarea>
+      </div>
+      <div class="flex justify-between items-center border-t pt-4">
+        <div class="text-lg font-bold">ยอดรวมทั้งสิ้น: <span id="total-price" class="text-amber-600 text-2xl">0</span> บาท</div>
+        <button type="submit" id="btn-submit" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-xl shadow">ยืนยันการสั่งซื้อ</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- ส่วนที่ 2: ระบบหยิบ แพ็ค และพิมพ์ใบจ่าหน้าพัสดุ -->
+  <section id="pack-tab" class="max-w-5xl mx-auto p-6 hidden">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-amber-900">📦 รายการออเดอร์สำหรับหยิบ & แพ็คสินค้า</h2>
+      <button onclick="loadOrders()" class="bg-amber-600 text-white px-4 py-2 rounded-lg text-sm">🔄 โหลดข้อมูลล่าสุด</button>
+    </div>
+
+    <div id="orders-list" class="space-y-4">
+      <p class="text-stone-500">กำลังโหลดข้อมูล...</p>
+    </div>
+
+    <!-- พื้นที่สำหรับพิมพ์ใบจ่าหน้า (ซ่อนไว้จนกว่าจะกดพิมพ์) -->
+    <div id="print-area" class="hidden bg-white mt-8">
+      <div class="border-b-2 border-black pb-3 mb-4 flex justify-between">
+        <div>
+          <h2 class="text-xl font-bold">ผู้ส่ง: แบรนด์ Honey good</h2>
+          <p class="text-sm">โทร: 089-999-9999 | กรุงเทพฯ 10900</p>
+        </div>
+        <div class="text-right">
+          <p class="font-bold" id="p-order-id"></p>
+          <p class="text-xs" id="p-date"></p>
+        </div>
+      </div>
+      <div class="mb-6">
+        <p class="text-sm font-bold underline">กรุณาส่ง (ผู้รับ):</p>
+        <p class="text-lg font-bold mt-1" id="p-name"></p>
+        <p class="text-md" id="p-phone"></p>
+        <p class="text-md mt-1" id="p-address"></p>
+      </div>
+      <div class="border-t border-dashed border-black pt-3">
+        <p class="font-bold text-sm mb-1">รายการสินค้าในกล่อง (Packing List):</p>
+        <ul class="list-disc pl-5 text-sm" id="p-items"></ul>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // นำ Web App URL จาก Google Apps Script มาวางแทนที่ตรงนี้
+    const SCRIPT_URL = 'วาง_WEB_APP_URL_ของคุณที่นี่';
+
+    function switchTab(tab) {
+      document.getElementById('shop-tab').classList.toggle('hidden', tab !== 'shop');
+      document.getElementById('pack-tab').classList.toggle('hidden', tab !== 'pack');
+      if (tab === 'pack') loadOrders();
+    }
+
+    function calcTotal() {
+      const q1 = parseInt(document.getElementById('qty-sku1').value) || 0;
+      const q2 = parseInt(document.getElementById('qty-sku2').value) || 0;
+      document.getElementById('total-price').innerText = (q1 * 250) + (q2 * 220);
+    }
+
+    async function submitOrder(e) {
+      e.preventDefault();
+      const q1 = parseInt(document.getElementById('qty-sku1').value) || 0;
+      const q2 = parseInt(document.getElementById('qty-sku2').value) || 0;
+      if (q1 === 0 && q2 === 0) return alert('กรุณาเลือกสินค้าอย่างน้อย 1 ชิ้นครับ');
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true; btn.innerText = 'กำลังบันทึก...';
+
+      const payload = {
+        name: document.getElementById('cust-name').value,
+        phone: document.getElementById('cust-phone').value,
+        address: document.getElementById('cust-address').value,
+        sku1: q1,
+        sku2: q2,
+        total: (q1 * 250) + (q2 * 220)
+      };
+
+      try {
+        const res = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+        const result = await res.json();
+        alert('สั่งซื้อสำเร็จ! รหัสออเดอร์ของคุณคือ: ' + result.orderId);
+        e.target.reset(); calcTotal();
+      } catch (err) {
+        alert('เกิดข้อผิดพลาดในการเชื่อมต่อ Google Sheet');
+      }
+      btn.disabled = false; btn.innerText = 'ยืนยันการสั่งซื้อ';
+    }
+
+    async function loadOrders() {
+      const container = document.getElementById('orders-list');
+      container.innerHTML = '<p>กำลังดึงข้อมูลจาก Google Sheet...</p>';
+      try {
+        const res = await fetch(SCRIPT_URL);
+        const orders = await res.json();
+        if (orders.length === 0) return container.innerHTML = '<p>ยังไม่มีรายการสั่งซื้อ</p>';
+
+        container.innerHTML = orders.reverse().map(o => `
+          <div class="bg-white p-5 rounded-xl shadow border flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-amber-700">${o.OrderID}</span>
+                <span class="text-xs px-2 py-0.5 rounded ${o.Status === 'แพ็คแล้ว' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${o.Status}</span>
+              </div>
+              <p class="font-bold mt-1">${o.CustomerName} (${o.Phone})</p>
+              <p class="text-sm text-stone-600">${o.Address}</p>
+              <div class="mt-2 text-sm bg-amber-50 p-2 rounded border border-amber-200">
+                <strong>รายการที่ต้องหยิบ:</strong> 
+                ${o.SKU1_Qty > 0 ? `น้ำผึ้งดอกไม้ป่า (SKU-01) x <b>${o.SKU1_Qty}</b>` : ''} 
+                ${o.SKU2_Qty > 0 ? `| น้ำผึ้งดอกลำไย (SKU-02) x <b>${o.SKU2_Qty}</b>` : ''}
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick='printLabel(${JSON.stringify(o)})' class="bg-stone-800 text-white px-4 py-2 rounded-lg text-sm font-semibold">🖨️ พิมพ์ใบจ่าหน้า</button>
+              ${o.Status !== 'แพ็คแล้ว' ? `<button onclick="markPacked('${o.OrderID}')" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">✅ แพ็คเสร็จแล้ว</button>` : ''}
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<p class="text-red-500">ไม่สามารถโหลดข้อมูลได้ กรุณาตรวจสอบ SCRIPT_URL</p>';
+      }
+    }
+
+    function printLabel(order) {
+      document.getElementById('p-order-id').innerText = 'Order: ' + order.OrderID;
+      document.getElementById('p-date').innerText = order.Timestamp;
+      document.getElementById('p-name').innerText = order.CustomerName;
+      document.getElementById('p-phone').innerText = 'โทร: ' + order.Phone;
+      document.getElementById('p-address').innerText = order.Address;
+      
+      let itemsHtml = '';
+      if (order.SKU1_Qty > 0) itemsHtml += `<li>Honey good น้ำผึ้งดอกไม้ป่าเดือน 5 (SKU-01) — จำนวน ${order.SKU1_Qty} ขวด</li>`;
+      if (order.SKU2_Qty > 0) itemsHtml += `<li>Honey good น้ำผึ้งดอกลำไยแท้ (SKU-02) — จำนวน ${order.SKU2_Qty} ขวด</li>`;
+      document.getElementById('p-items').innerHTML = itemsHtml;
+
+      document.getElementById('print-area').classList.remove('hidden');
+      window.print();
+      document.getElementById('print-area').classList.add('hidden');
+    }
+
+    async function markPacked(orderId) {
+      await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'updateStatus', orderId }) });
+      loadOrders();
+    }
+  </script>
+</body>
+</html>
